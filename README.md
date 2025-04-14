@@ -1,4 +1,4 @@
-# snowflake
+# Snowflake
 
 A customizable and high-performance Snowflake ID generator written in Go. Supports both:
 
@@ -6,6 +6,7 @@ A customizable and high-performance Snowflake ID generator written in Go. Suppor
 - **64-bit millisecond-based IDs** (for high-throughput systems)
 
 ---
+<br>
 
 ## ✨ Features
 
@@ -17,8 +18,48 @@ A customizable and high-performance Snowflake ID generator written in Go. Suppor
 - ✅ Decode function to extract timestamp, machine ID, and sequence
 
 ---
+<br>
 
 ## 📦 Installation
 
 ```bash
 go get github.com/tackboon/snowflake
+```
+
+---
+<br>
+
+## 🚀 Usage
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/tackboon/snowflake"
+)
+
+func main() {
+	var machineID int64 = 1
+	var startTimestamp int64 = 1744615749
+
+	generator := snowflake.NewDefaultSnowflake64Bit(machineID, startTimestamp)
+	id, err := generator.GenerateID()
+
+	fmt.Println(id, err)
+}
+```
+
+---
+<br>
+
+## ⚠️ Notes
+
+Use 53-bit mode for systems like Redis where ZSET scores require float64 precision
+
+Use 64-bit mode for internal services or high-volume event streams
+
+Ensure all nodes use the same StartTimestamp and are loosely time-synced
+
+<br>
