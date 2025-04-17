@@ -42,7 +42,7 @@ import (
 
 func main() {
 	var machineID int64 = 1
-	var startTimestamp int64 = 1744615749
+	var startTimestamp int64 = 1744615749000
 
 	generator := snowflake.NewDefaultSnowflake64Bit(machineID, startTimestamp)
 	id, err := generator.GenerateID()
